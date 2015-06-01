@@ -350,7 +350,7 @@ hr {
 
 .main-brand {
     position: absolute;
-    width: calc(100% - 260px - 383px - 2px);
+    width: calc(100% - 260px);
     right: 0;
     background-color: rgba(0,0,0,.4);
     height: 63px
@@ -912,6 +912,10 @@ hr {
     height: 64px;
     width: calc(100% - 130px);
     line-height: 68px
+}
+
+.full-width {
+    width: 100%;
 }
 
 .widget__title h3 {

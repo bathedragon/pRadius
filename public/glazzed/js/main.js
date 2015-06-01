@@ -17327,16 +17327,6 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-// Location url stuff
-var href = window.location.href;
-var page = href.substr(href.lastIndexOf('/') + 1);
-
-var params = window.location.search.substring(1);
-if(page === '' || page === 'index.html' || page === '#' || page === '?' || page === '?#' || page === '?' + params  || page === 'index.html?' + params ){
-    $(window).load(function(){ actualTab(); }) // Window on load
-    $(window).resize(function(){ actualTab(); }) // Window on resize 
-}
-
 
 // Loading...
 $(window).load(function(){
@@ -17382,12 +17372,6 @@ $(document).ready(function(){
     if(getQueryVariable('bg')){
         $('body').addClass('bg' + getQueryVariable('bg'));
     }
-
-    // Back history
-    $('.profile li:first-child').click(function(event){
-        event.preventDefault();
-        history.back(1);
-    })
 
     // Prevent click on widget buttons (remove if it's necessary)
     $('.widget__config a').click(function(){ return false; })

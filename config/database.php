@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => env('DB_DRIVER','mysql'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
-			'strict'    => false,
+			'strict'    => env('DB_STRICT',true),
 		],
 
 		'pgsql' => [
@@ -115,9 +115,9 @@ return [
 		'cluster' => false,
 
 		'default' => [
-			'host'     => '127.0.0.1',
-			'port'     => 6379,
-			'database' => 0,
+			'host'     => env('REDIS_HOST','127.0.0.1'),
+			'port'     => env('REDIS_PORT',6379),
+			'database' => env('REDIS_DATABASE',0),
 		],
 
 	],
