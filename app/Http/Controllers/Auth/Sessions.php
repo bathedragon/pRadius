@@ -14,6 +14,7 @@ use App\Models\Rad\Group;
 use Session;
 use App\Models\Traffic;
 use App\Models\Graph;
+use App\Models\Operator;
 
 class Sessions extends Controller {
 
@@ -35,6 +36,17 @@ class Sessions extends Controller {
             return [
                 'ret' => true,
                 'redirect' => url('member/profile/'.$username)
+            ];
+        }
+
+        if(Operator::login($username,$password)) {
+            Session::put('role','admin');
+            Session::put('username',$username);
+            Session::put('user_group','admin');
+
+            return [
+                'ret' => true,
+                'redirect' => url('admin')
             ];
         }
 

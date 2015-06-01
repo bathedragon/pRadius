@@ -33,7 +33,7 @@
             <div class="widget__content">
                 <input type="text" id="username" placeholder="用户名或邮箱">
                 <input type="password" id="password" placeholder="密码">
-                <button type="button" onclick="signin(this)">登录</button>
+                <button type="button" onclick="signin(this)"id="login-btn" >登录</button>
             </div>
         </article>
     </div>
@@ -41,10 +41,11 @@
 
 <script type="text/javascript" src="/glazzed/js/main.js"></script>
 <script>
-    var submited = false;
-    function signin(btn) {
+    var submited = false,btn = $("#login-btn");
+    function signin(self) {
         if(submited == true) return;
         submited = true;
+        btn.html('正在登录...');
         var u = $("#username").val(),p = $("#password").val();
         if(u == ""  || p == "") return;
         $.post("/session/new",{
@@ -58,6 +59,7 @@
             } else {
                 alert('账号或密码错误');
             }
+            btn.html('登录');
         },'json');
     }
     window.onkeydown = function(event) {
