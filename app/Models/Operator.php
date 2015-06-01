@@ -34,4 +34,8 @@ class Operator extends Model {
 
         return true;
     }
+
+    public static function login_update($email,array $data) {
+        return DB::table('p_operators')->where("email",$email)->update($data) >= 0;
+    }
 }

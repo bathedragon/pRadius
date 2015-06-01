@@ -69,4 +69,19 @@ class Operator extends Controller {
     public function update() {}
     
     public function destroy() {}
+
+    public function postDelete() {
+        $operator = OperatorModel::find(Input::get("id"));
+        if(isset($operator->email) && $operator->email == $this->username) {
+            return [
+                'ret' => false,
+                'error' => '不能删除自己'
+            ];
+        }
+
+        $ret = $operator->delete();
+        return [
+            'ret' => $ret
+        ];
+    }
 }

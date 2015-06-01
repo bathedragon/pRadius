@@ -26,13 +26,18 @@ Route::group(['prefix' => 'member' ,'middleware' => 'member'],function() {
 Route::group(['prefix' => 'admin' ,'middleware' => 'administrator'],function() {
     Route::get('/','Backend\Dashboard@index');
     Route::resource("dashboard",'Backend\Dashboard');
-    Route::controller('plan','Backend\Plan');
+
     Route::resource('plan','Backend\Plan');
-    Route::controller('member','Backend\Member');
+    Route::controller('plan','Backend\Plan');
+
     Route::resource('member','Backend\Member');
+    Route::controller('member','Backend\Member');
+
     Route::controller('report','Backend\Report');
     Route::controller('graph','Backend\Graphs');
+
     Route::resource('operator','Backend\Operator');
+    Route::controller('operator','Backend\Operator');
 });
 
 

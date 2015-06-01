@@ -48,7 +48,7 @@
                             <td>{{$operator->email}}</td>
                             <td>{{$operator->last_login}}</td>
                             <td>
-                                <button class="btn red fixed">删除</button>
+                                <button class="btn red fixed" onclick="destroy({{$operator->id}})">删除</button>
                             </td>
                         </tr>
                         @endforeach
@@ -77,5 +77,13 @@
             }
         });
     });
+    function destroy(oid){
+        $.post("/admin/operator/delete",{
+            _token : "{{csrf_token()}}",
+            id : oid
+        },function(res){
+            if(res.ret) location.reload(); else alert(res.error);
+        },'json')
+    }
 </script>
 @stop

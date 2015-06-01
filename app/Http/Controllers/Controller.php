@@ -10,9 +10,9 @@ abstract class Controller extends BaseController {
 
 	use DispatchesCommands, ValidatesRequests;
 
-    private $role;
-    private $username;
-    private $user_group;
+    protected $role;
+    protected $username;
+    protected $user_group;
 
     function __construct() {
         $this->init();

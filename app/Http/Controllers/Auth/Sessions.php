@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Request as FacadeRequest;
 use App\Models\Rad\Check;
@@ -15,6 +16,7 @@ use Session;
 use App\Models\Traffic;
 use App\Models\Graph;
 use App\Models\Operator;
+use Input;
 
 class Sessions extends Controller {
 
@@ -43,6 +45,11 @@ class Sessions extends Controller {
             Session::put('role','admin');
             Session::put('username',$username);
             Session::put('user_group','admin');
+
+            Operator::login_update($username,[
+                'last_login' => Carbon::now()->format('Y-m-d H:i:s'),
+                'last_login_ip' => Input::ip()
+            ]);
 
             return [
                 'ret' => true,
