@@ -17373,9 +17373,6 @@ $(document).ready(function(){
         $('body').addClass('bg' + getQueryVariable('bg'));
     }
 
-    // Prevent click on widget buttons (remove if it's necessary)
-    $('.widget__config a').click(function(){ return false; })
-
     // Mobile Nav
     $('.mobile-nav').click(function(){
         $('.sidebar').toggleClass('open');

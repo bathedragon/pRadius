@@ -68,7 +68,7 @@
 
 
 
-                </div> <!-- /widget__content -->
+                </div>
 
             </article><!-- /widget -->
         </div>
