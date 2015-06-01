@@ -13,6 +13,7 @@ use App\Models\Rad\Check;
 use App\Models\Rad\Group;
 use Session;
 use App\Models\Traffic;
+use App\Models\Graph;
 
 class Sessions extends Controller {
 
@@ -43,20 +44,25 @@ class Sessions extends Controller {
     }
 
     public function destroy() {
-        //Session::flush();
+        Session::flush();
         return redirect()->away("/");
     }
 
     public function profile($username) {
-        //if($username != SessionDriver::get('username')) abort(404);
+        if($username != Session::get('username')) abort(404);
+
+        if( !Check::exist($username)) abort(404);
+
         $traffic = new Traffic($username);
+        $graph = new Graph($username);
 
         return view('profile',[
             'total' => $traffic->total(),
             'used' => [
                 'today' => $traffic->daily(),
                 'month' => $traffic->monthly()
-            ]
+            ],
+            'graph' => $graph->monthly()
         ]);
     }
 }

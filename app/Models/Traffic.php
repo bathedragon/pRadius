@@ -30,7 +30,7 @@ class Traffic extends Model {
     }
 
     /**
-     *
+     * vpn用户的总流量
      * @param $username
      * @return array
      */
@@ -53,6 +53,7 @@ class Traffic extends Model {
     }
 
     /**
+     * 当日使用流量
      * @return int
      */
     public function daily() {
@@ -60,13 +61,14 @@ class Traffic extends Model {
         $start = $today.' 00:00:00';
         $end = $today.' 23:59:59';
 
-        $sql = "SELECT FLOOR(SUM(acctinputoctets+acctoutputoctets)/1024/1024) as total FROM radacct WHERE username='?' AND acctstarttime > ? AND acctstoptime < ?";
+        $sql = "SELECT FLOOR(SUM(acctinputoctets+acctoutputoctets)/1024/1024) as total FROM radacct WHERE username=? AND acctstarttime > ? AND acctstoptime < ?";
         $result = DB::select(DB::raw($sql),[$this->username,$start,$end]);
 
         return isset($result[0]->total) ? $result[0]->total : 0;
     }
 
     /**
+     * 本月使用流量
      * @return int
      */
     public function monthly() {
@@ -74,7 +76,7 @@ class Traffic extends Model {
         $start = $this_month.'-01 00:00:00';
         $end = Carbon::parse($this_month.'-15 00:00:00')->endOfMonth();
 
-        $sql = "SELECT FLOOR(SUM(acctinputoctets+acctoutputoctets)/1024/1024) as total FROM radacct WHERE username='?' AND acctstarttime > ? AND acctstoptime < ?";
+        $sql = "SELECT FLOOR(SUM(acctinputoctets+acctoutputoctets)/1024/1024) as total FROM radacct WHERE username=? AND acctstarttime > ? AND acctstoptime < ?";
 
         $result = DB::select(DB::raw($sql),[$this->username,$start,$end]);
 

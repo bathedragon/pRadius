@@ -72,12 +72,6 @@
 
         @yield('container')
 
-        <footer class="footer-brand">
-            <img src="/glazzed/img/logo_trim.png">
-            <p>© 2014 Glazzed. All rights reserved</p>
-        </footer>
-
-
     </section>
 
 </div>
@@ -88,7 +82,6 @@
 <script type="text/javascript" src="/glazzed/js/amcharts/amcharts.js"></script>
 <script type="text/javascript" src="/glazzed/js/amcharts/serial.js"></script>
 <script type="text/javascript" src="/glazzed/js/amcharts/pie.js"></script>
-<script type="text/javascript" src="/glazzed/js/chart.js"></script>
 @yield('scripts')
 </body>
 </html>
