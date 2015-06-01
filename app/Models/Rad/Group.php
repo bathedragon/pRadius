@@ -12,4 +12,12 @@ use DB;
 class Group extends Model {
     protected $table = 'radusergroup';
     protected $guarded = ['id'];
+
+    public static function belong($username) {
+        $query = DB::table('radusergroup')->where('username',$username);
+
+        $group = $query->first();
+
+        return isset($group->groupname) ? $group->groupname : null;
+    }
 }

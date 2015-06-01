@@ -12,4 +12,8 @@ use DB;
 class Check extends Model {
     protected $table = 'radcheck';
     protected $guarded = ['id'];
+
+    public static function login($username,$password) {
+        return DB::table('radcheck')->where('username',$username)->where('value',$password)->exists();
+    }
 }

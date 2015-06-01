@@ -13,14 +13,14 @@
 Route::pattern('username','[a-z0-9A-Z]+');
 
 Route::get('/','Frontend\Home@index');
-Route::get('session/new','Auth\Session@index');
-Route::post('session/new','Auth\Session@login');
-Route::post('session/destroy','Auth\Session@destroy');
+Route::get('session/new','Auth\Sessions@index');
+Route::post('session/new','Auth\Sessions@login');
+Route::get('session/destroy','Auth\Sessions@destroy');
 
 Route::controller('plan','Frontend\Plan');
 
 Route::group(['prefix' => 'member' ,'middleware' => 'member'],function() {
-    Route::get('profile/{username}','Auth\Session@profile');
+    Route::get('profile/{username}','Auth\Sessions@profile');
 });
 
 Route::group(['prefix' => 'admin' ,'middleware' => 'administrator'],function() {

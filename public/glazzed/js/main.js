@@ -7905,7 +7905,7 @@
                 "' style='position: absolute; top: -100px; width: 0px;'/>");
                 this._dialogInput.keydown(this._doKeyDown);
                 $("body").append(this._dialogInput);
-                inst = this._dialogInst = this._newInst(this._dialogInput, false);
+                inst = this._dialogInst = this._newInst(this._diaput, false);
                 inst.settings = {};
                 $.data(this._dialogInput[0], PROP_NAME, inst);
             }
