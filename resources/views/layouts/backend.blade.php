@@ -79,9 +79,9 @@
                 </ul>
             </li>
             <li>
-                <a class="main-nav__link" href="grid.html">
+                <a class="main-nav__link" href="/admin/plan">
                     <span class="main-nav__icon"><i class="pe-7f-browser"></i></span>
-                    Grid Layout
+                    流量方案
                 </a>
             </li>
             <li>
@@ -116,5 +116,17 @@
 <script type="text/javascript" src="/glazzed/js/amcharts/serial.js"></script>
 <script type="text/javascript" src="/glazzed/js/amcharts/pie.js"></script>
 @yield('scripts')
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: 'http://api.randomuser.me/',
+            dataType: 'json',
+            success: function(data){
+                $("#user-avatar").attr("src",data.results[0].user.picture.medium);
+                console.log(data);
+            }
+        });
+    });
+</script>
 </body>
 </html>

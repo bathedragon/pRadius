@@ -67,16 +67,6 @@
 
 @section('scripts')
 <script>
-    $(document).ready(function(){
-        $.ajax({
-            url: 'http://api.randomuser.me/',
-            dataType: 'json',
-            success: function(data){
-                $("#user-avatar").attr("src",data.results[0].user.picture.medium);
-                console.log(data);
-            }
-        });
-    });
     function destroy(oid){
         $.post("/admin/operator/delete",{
             _token : "{{csrf_token()}}",

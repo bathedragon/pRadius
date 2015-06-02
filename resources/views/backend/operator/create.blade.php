@@ -46,15 +46,6 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            $.ajax({
-                url: 'http://api.randomuser.me/',
-                dataType: 'json',
-                success: function(data){
-                    $("#user-avatar").attr("src",data.results[0].user.picture.medium);
-                    console.log(data);
-                }
-            });
-
             $("#newOperator").on("click",function(){
                 var email = $("#input-email").val(),password = $("#input-password").val();
                 $.post("/admin/operator",{

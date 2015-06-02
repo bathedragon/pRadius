@@ -17424,34 +17424,8 @@ $(document).ready(function(){
 
 
     // Sliders & progressbar
-    $('.slider').slider();
-    $('.slider.range').slider({
-        range: true,
-        max: 100,
-        values: [ 32, 61 ],
-        slide: function( event, ui ) {
-            $('.slider.range .num-min').html($( ".slider.range" ).slider( "values", 0) + "k");
-            $('.slider.range .num-max').html($( ".slider.range" ).slider( "values", 1) + "k");
-        }
-    });
-    $('.slider.range-min, .sl1, .sl2').slider({
-        range: "min",
-        min:4,
-        max: 25,
-        slide: function( event, ui ) {
-            //$('.slider.range-min > a.ui-slider-handle').html("<div class='range-tooltip'>$ " + $(".slider.range-min").slider("value") + "</div>")
-            $(this).find('.num-max').html($(this).slider("value") + "k")
-            if($(this).slider("value") > 1){
-                $(this).addClass('active');
-            } else {
-                $(this).removeClass('active');
-            }
-        },
-        stop: function( event, ui ) {
-            $('.range-tooltip').delay(1000).fadeOut();
-        },
-        value:10
-    });
-    $( "#amount-block" ).html("Min: $" + $(".slider.range-min").slider( "option", "min"));
+    $('.slider:not(.spec)').slider();
+
+    //$( "#amount-block" ).html("Min: $" + $(".slider.range-min").slider( "option", "min"));
 
 }) // Ready
