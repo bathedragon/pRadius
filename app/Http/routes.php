@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::pattern('username','[a-z0-9A-Z]+');
+Route::pattern('username','^[a-z0-9A-Z]+$');
 
 Route::get('/','Frontend\Home@index');
 Route::get('session/new','Auth\Sessions@index');

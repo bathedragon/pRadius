@@ -20,4 +20,10 @@ class Group extends Model {
 
         return isset($group->groupname) ? $group->groupname : null;
     }
+
+    public static function members($groupname){
+        $query = DB::table('radusergroup')->where("groupname",$groupname);
+
+        return $query->get();
+    }
 }
