@@ -56,4 +56,13 @@ class Check extends Model {
             return $id > 0;
         });
     }
+
+    public static function page($take = 20) {
+        $query = DB::table('radcheck');
+
+        $query->select(['radcheck.*','radusergroup.groupname']);
+        $query->join("radusergroup","radcheck.username","=","radusergroup.username","left");
+
+        return $query->paginate($take);
+    }
 }

@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'administrator'],function() {
     Route::controller('plan','Backend\Plan');
 
     Route::post('member/delete/batch','Backend\Member@deleteBatch');
+    Route::post('member/delete','Backend\Member@delete');
     Route::get('member/apply','Backend\Member@apply');
     Route::post('member/agree','Backend\Member@agree');
     Route::post('member/reject','Backend\Member@reject');

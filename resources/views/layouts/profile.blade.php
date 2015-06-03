@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$username}} 的个人中心</title>
+    <title>{{$show_username}} 的个人中心</title>
     <link rel="icon" sizes="192x192" href="/glazzed/img/touch-icon.png" />
     <link rel="apple-touch-icon" href="/glazzed/img/touch-icon-iphone.png" />
     <link rel="apple-touch-icon" sizes="76x76" href="/glazzed/img/touch-icon-ipad.png" />
@@ -48,7 +48,7 @@
             <figure class="rounded-image profile__img">
                 <img class="media-object" src="" alt="user" id="user-avatar">
             </figure>
-            <h2 class="user-info__name">{{$username}}</h2>
+            <h2 class="user-info__name">{{$show_username}}</h2>
             <h3 class="user-info__role">Member - {{$user_group}}</h3>
             <ul class="user-info__numbers">
                 <li></li>

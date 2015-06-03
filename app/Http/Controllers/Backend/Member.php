@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Request as FacadeRequest;
 use App\Models\Apply;
 use App\Models\Rad\Check;
+use App\Models\Traffic;
 
 class Member extends Controller {
 
@@ -62,6 +63,9 @@ class Member extends Controller {
 
     public function index() {
 
+        return view('backend.member.index',[
+            'members' => Check::page()
+        ]);
     }
 
     public function create() {}
@@ -73,4 +77,15 @@ class Member extends Controller {
     public function edit() {}
 
     public function update() {}
+
+    public function delete() {
+        $id = FacadeRequest::input('id');
+        $member = Check::find($id);
+        $ret = $member->delete();
+
+        $traffic = new Traffic(FacadeRequest::input('username'));
+        $traffic->remove();
+
+        return ['ret' => $ret];
+    }
 }

@@ -82,4 +82,9 @@ class Traffic extends Model {
 
         return isset($result[0]->total) ? $result[0]->total : 0;
     }
+
+
+    public function remove() {
+        return DB::table('radacct')->where("username",$this->username)->delete() >= 0;
+    }
 }

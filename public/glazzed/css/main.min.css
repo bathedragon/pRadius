@@ -4820,3 +4820,18 @@ input[name^=tab-radio]:checked+label {
         padding-top: 0
     }
 }
+
+.pagination>li:first-child>a, .pagination>li:first-child>span,
+.pagination>li>a, .pagination>li>span{
+    color : #fff;
+    background-color: transparent;
+}
+.pagination>.disabled>span,
+.pagination>.disabled>span:hover,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>a,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>a:focus {
+    color: #fff;
+    background-color: transparent;
+}

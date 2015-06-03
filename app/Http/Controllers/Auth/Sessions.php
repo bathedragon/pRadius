@@ -68,7 +68,7 @@ class Sessions extends Controller {
     }
 
     public function profile($username) {
-        if($username != Session::get('username')) abort(404);
+        if($username != $this->username && $this->role != 'admin') abort(404);
 
         if( !Check::exist($username)) abort(404);
 
@@ -81,7 +81,8 @@ class Sessions extends Controller {
                 'today' => $traffic->daily(),
                 'month' => $traffic->monthly()
             ],
-            'graph' => $graph->monthly()
+            'graph' => $graph->monthly(),
+            'show_username' => $username
         ]);
     }
 }
