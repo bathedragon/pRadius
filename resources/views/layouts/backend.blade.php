@@ -71,11 +71,11 @@
             <li class="main-nav--collapsible">
                 <a class="main-nav__link" href="#" onclick="return false;">
                     <span class="main-nav__icon"><i class="pe-7f-monitor"></i></span>
-                    Sample pages <span class="badge badge--line badge--blue">2</span>
+                    用户管理 <span class="badge badge--line badge--blue">2</span>
                 </a>
                 <ul class="main-nav__submenu">
-                    <li><a href="404.html"><span>Error 404</span></a></li>
-                    <li><a href="login.html"><span>Login</span></a></li>
+                    <li><a href="/admin/member/apply"><span>申请列表</span></a></li>
+                    <li><a href="/admin/member"><span>用户列表</span></a></li>
                 </ul>
             </li>
             <li>

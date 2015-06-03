@@ -30,8 +30,11 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'administrator'],function() {
     Route::resource('plan','Backend\Plan');
     Route::controller('plan','Backend\Plan');
 
+    Route::post('member/delete/batch','Backend\Member@deleteBatch');
+    Route::get('member/apply','Backend\Member@apply');
+    Route::post('member/agree','Backend\Member@agree');
+    Route::post('member/reject','Backend\Member@reject');
     Route::resource('member','Backend\Member');
-    Route::controller('member','Backend\Member');
 
     Route::controller('report','Backend\Report');
     Route::controller('graph','Backend\Graphs');

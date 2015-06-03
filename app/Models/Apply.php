@@ -17,4 +17,20 @@ use DB;
 class Apply extends Model {
     protected $table = 'p_member_apply';
     protected $guarded = ['id'];
+
+    public static function lastApply($count = 100) {
+        $query = DB::table('p_member_apply');
+        $query->limit($count);
+
+        return $query->get();
+    }
+
+    public static function delete_batch($id) {
+        $query = DB::table('p_member_apply');
+        if(!is_array($id)) {
+            $id = [intval($id)];
+        }
+        $query->whereIn('id',$id);
+        return $query->delete() > 0;
+    }
 }

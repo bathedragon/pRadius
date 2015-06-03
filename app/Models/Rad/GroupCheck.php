@@ -70,7 +70,7 @@ class GroupCheck extends Model {
     }
 
     public function getAll() {
-        $sql = "SELECT groupname,GROUP_CONCAT(attribute) AS attr,GROUP_CONCAT(value) AS val FROM radgroupcheck GROUP BY groupname";
+        $sql = "SELECT groupname,GROUP_CONCAT(attribute) AS attr,GROUP_CONCAT(value) AS val FROM radgroupcheck GROUP BY groupname ORDER BY id";
         $result = DB::select($sql);
 
         $_tmp = [];

@@ -9,12 +9,60 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Request as FacadeRequest;
+use App\Models\Apply;
+use App\Models\Rad\Check;
 
 class Member extends Controller {
 
-    public function getApply() {}
+    public function apply() {
 
-    public function index() {}
+        return view('backend.member.apply',[
+            'applies' => Apply::lastApply()
+        ]);
+    }
+
+    public function agree() {
+        $id = FacadeRequest::input('id');
+        $apply = Apply::find($id);
+        if(Check::exist($apply->username)) {
+            return [
+                'ret' => false,
+                'error' => '该用户名已存在,无法通过'
+            ];
+        }
+
+        $ret = Check::make([
+            'username' => $apply->username,
+            'password' => $apply->password,
+            'groupname' => $apply->plan
+        ]);
+
+        return [
+            'ret' => $ret
+        ];
+    }
+
+    public function reject() {
+        $id = FacadeRequest::input('id');
+        $apply = Apply::find($id);
+        $ret = $apply->delete();
+
+        return [
+            'ret' => $ret
+        ];
+    }
+
+    public function deleteBatch() {
+        $id = FacadeRequest::input("id");
+        if(stripos($id,",") !== false) $id = explode(",",$id);
+        return [
+            'ret' => Apply::delete_batch($id)
+        ];
+    }
+
+    public function index() {
+
+    }
 
     public function create() {}
 

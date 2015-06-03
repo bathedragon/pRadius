@@ -31,4 +31,29 @@ class Check extends Model {
     public static function exist($username) {
         return DB::table('radcheck')->where('username',$username)->exists();
     }
+
+    public static function make(array $user) {
+        return DB::transaction(function() use($user){
+            $id = DB::table('radcheck')->insertGetId([
+                'username' => $user['username'],
+                'attribute' => 'password',
+                'op' => '==',
+                'value' => $user['password']
+            ]);
+
+            if(!$id) return false;
+
+            $id = DB::table('radusergroup')->insertGetId([
+                'username' => $user['username'],
+                'groupname' => $user['groupname'],
+                'priority' => 10
+            ]);
+
+            if(!$id) return false;
+
+            $id = DB::table('p_member_apply')->where('username',$user['username'])->delete();
+
+            return $id > 0;
+        });
+    }
 }
