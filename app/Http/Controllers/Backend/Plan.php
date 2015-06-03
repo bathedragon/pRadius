@@ -20,6 +20,9 @@ class Plan extends Controller {
         'daily' => 'required|numeric',
         'monthly' => 'required|numeric',
         'simultaneous' => 'required|numeric',
+        'idletimeout' => 'required|numeric',
+        'sessiontimeout' => 'required|numeric',
+        'acctinterval' => 'required|numeric',
         'price' => 'required'
     ];
     private $messages = [
@@ -45,10 +48,13 @@ class Plan extends Controller {
     }
 
     public function store() {
-        $input = FacadeRequest::only(['name','daily','monthly','price','simultaneous']);
+        $input = FacadeRequest::only(['name','daily','monthly','price','simultaneous','idletimeout','sessiontimeout','acctinterval']);
         $input['daily'] = preg_replace('/[^\d]/','',$input['daily']);
         $input['monthly'] = intval(preg_replace('/[^\d]/','',$input['monthly'])) * 1024;
         $input['simultaneous'] = preg_replace('/[^\d]/','',$input['simultaneous']);
+        $input['idletimeout'] = preg_replace('/[^\d]/','',$input['idletimeout']) * 3600;
+        $input['sessiontimeout'] = preg_replace('/[^\d]/','',$input['sessiontimeout']) * 3600;
+        $input['acctinterval'] = preg_replace('/[^\d]/','',$input['acctinterval']) * 60;
 
         //todo 验证流量的最大值
         $vadalitor = Validator::make($input,$this->rules,$this->messages);
@@ -78,10 +84,13 @@ class Plan extends Controller {
     }
 
     public function postEdit() {
-        $input = FacadeRequest::only(['name','daily','monthly','price','simultaneous']);
+        $input = FacadeRequest::only(['name','daily','monthly','price','simultaneous','idletimeout','sessiontimeout','acctinterval']);
         $input['daily'] = preg_replace('/[^\d]/','',$input['daily']);
         $input['monthly'] = intval(preg_replace('/[^\d]/','',$input['monthly'])) * 1024;
         $input['simultaneous'] = preg_replace('/[^\d]/','',$input['simultaneous']);
+        $input['idletimeout'] = preg_replace('/[^\d]/','',$input['idletimeout']) * 3600;
+        $input['sessiontimeout'] = preg_replace('/[^\d]/','',$input['sessiontimeout']) * 3600;
+        $input['acctinterval'] = preg_replace('/[^\d]/','',$input['acctinterval']) * 60;
 
         //todo 验证流量的最大值
         $vadalitor = Validator::make($input,$this->rules,$this->messages);

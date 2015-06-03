@@ -45,8 +45,7 @@
 
                     </div>
 
-                    <label for="input-1" class="stacked-label"><i class="pe-7f-network"></i></label>
-                    <input type="text" class="stacked-input" id="traffic-price" placeholder="价格" value="免费">
+
 
                     <label for="input-1" class="stacked-label"><i class="pe-7f-next"></i></label>
                     <input type="text" class="stacked-input" id="simultaneous-use" placeholder="同时在线数" disabled>
@@ -55,9 +54,37 @@
 
                     </div>
 
+
+                    <label for="input-1" class="stacked-label"><i class="pe-7f-next"></i></label>
+                    <input type="text" class="stacked-input" id="idle-timeout" placeholder="空闲超时" disabled>
+
+                    <div class="slider range-min orange idletimeout spec">
+
+                    </div>
+
+
+                    <label for="input-1" class="stacked-label"><i class="pe-7f-next"></i></label>
+                    <input type="text" class="stacked-input" id="session-timeout" placeholder="会话超时" disabled>
+
+                    <div class="slider range-min orange sessiontimeout spec">
+
+                    </div>
+
+                    <label for="input-1" class="stacked-label"><i class="pe-7f-next"></i></label>
+                    <input type="text" class="stacked-input" id="acct-interval" placeholder="统计间隔" disabled>
+
+                    <div class="slider range-min orange acctinterval spec">
+
+                    </div>
+
+
+
+                    <label for="input-1" class="stacked-label"><i class="pe-7f-network"></i></label>
+                    <input type="text" class="stacked-input" id="traffic-price" placeholder="价格" value="免费">
+
                     <button type="button" id="newPlan">添加</button>
                 </div>
-                <article>
+                </article>
         </div>
     </div>
 @stop
@@ -80,11 +107,13 @@
             $(".daily").slider({
                 range : "min",
                 min : 512,
-                max : 10240+512,
+                max : 10240,
                 slide : function(event,ui) {
                     $("#traffic-daily").val("每日 "+$(this).slider("value") + "M");
                 },
-                stop : function(event,ui) {},
+                stop : function(event,ui) {
+                    $("#traffic-daily").val("每日 "+$(this).slider("value") + "M");
+                },
                 step : 512,
                 value : 512
             });
@@ -95,18 +124,59 @@
                 slide : function(event,ui) {
                     $("#traffic-monthly").val("每月 "+$(this).slider("value") + "G");
                 },
-                stop : function(event,ui) {},
+                stop : function(event,ui) {
+                    $("#traffic-monthly").val("每月 "+$(this).slider("value") + "G");
+                },
                 step : 1,
                 value : 1
             });
             $(".simultaneous").slider({
                 range : "min",
-                min : 0,
+                min : 1,
                 max : 10,
                 slide : function(event,ui) {
                     $("#simultaneous-use").val(" "+$(this).slider("value") + "台设备同时登录");
                 },
-                stop : function(event,ui) {},
+                stop : function(event,ui) {
+                    $("#simultaneous-use").val(" "+$(this).slider("value") + "台设备同时登录");
+                },
+                step : 1
+            });
+
+            $(".idletimeout").slider({
+                range : "min",
+                min : 1,
+                max : 24,
+                slide : function(event,ui) {
+                    $("#idle-timeout").val("空闲超时 "+$(this).slider("value") + "小时");
+                },
+                stop : function(event,ui) {
+                    $("#idle-timeout").val("空闲超时 "+$(this).slider("value") + "小时");
+                },
+                step : 1
+            });
+            $(".sessiontimeout").slider({
+                range : "min",
+                min : 1,
+                max : 24,
+                slide : function(event,ui) {
+                    $("#session-timeout").val("会话超时 "+$(this).slider("value") + "小时");
+                },
+                stop : function(event,ui) {
+                    $("#session-timeout").val("会话超时 "+$(this).slider("value") + "小时");
+                },
+                step : 1
+            });
+            $(".acctinterval").slider({
+                range : "min",
+                min : 1,
+                max : 60,
+                slide : function(event,ui) {
+                    $("#acct-interval").val("统计间隔 "+$(this).slider("value") + "分钟");
+                },
+                stop : function(event,ui) {
+                    $("#acct-interval").val("统计间隔 "+$(this).slider("value") + "分钟");
+                },
                 step : 1
             });
         });
@@ -117,6 +187,9 @@
                 monthly : $("#traffic-monthly").val(),
                 price : $("#traffic-price").val(),
                 simultaneous : $("#simultaneous-use").val(),
+                idletimeout : $("#idle-timeout").val(),
+                sessiontimeout : $("#session-timeout").val(),
+                acctinterval : $("#acct-interval").val(),
                 _token : "{{csrf_token()}}"
             };
 
