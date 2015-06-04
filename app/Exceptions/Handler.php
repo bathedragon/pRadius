@@ -2,6 +2,7 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use View;
 
 class Handler extends ExceptionHandler {
 
@@ -36,6 +37,9 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
+        if($this->isHttpException($e) && View::exists("errors.".$e->getCode())) {
+            return view('errors'.$e->getCode());
+        }
 		return parent::render($request, $e);
 	}
 

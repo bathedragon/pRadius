@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,13 +32,13 @@
         <div class="main-logo error-page"><img src="/glazzed/img/logo.png"></div>
         <div class="error-wrap">
             <div class="error">
-                <span>503 Be right back.</span>
+                <span>404 Error</span>
             </div>
             <div class="error">
-                <span>503 Be right back.</span>
+                <span>404 Error</span>
             </div>
             <div class="error">
-                <span>503 Be right back.</span>
+                <span>404 Error</span>
             </div>
             <p>
                 <a href="/"><i class="pe-7s-home"></i></a>
