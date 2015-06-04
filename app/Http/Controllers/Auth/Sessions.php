@@ -84,7 +84,8 @@ class Sessions extends Controller {
                 'month' => $traffic->monthly()
             ],
             'graph' => $graph->monthly(),
-            'show_username' => $username
+            'show_username' => $username,
+            'show_logout' => $username == $this->username
         ]);
     }
 }

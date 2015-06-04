@@ -25,9 +25,11 @@
 
     <ul class="profile">
         <li>
+            @if($show_logout)
             <a href="/session/destroy" class="btn-circle no-circle">
                 <i class="pe-7f-back"></i>
             </a>
+            @endif
         </li>
     </ul>
 
