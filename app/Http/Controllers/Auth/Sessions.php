@@ -22,7 +22,7 @@ class Sessions extends Controller {
 
 
     public function index() {
-
+        if($this->username !== 'guest') return redirect()->away(Session::get('user_default_url','/'));
         return view('login');
     }
 
@@ -34,6 +34,7 @@ class Sessions extends Controller {
             Session::put('role','member');
             Session::put('username',$username);
             Session::put('user_group',Group::belong($username));
+            Session::put('user_default_url',url('member/profile/'.$username));
 
             return [
                 'ret' => true,
@@ -45,6 +46,7 @@ class Sessions extends Controller {
             Session::put('role','admin');
             Session::put('username',$username);
             Session::put('user_group','admin');
+            Session::put('user_default_url',url('admin'));
 
             Operator::login_update($username,[
                 'last_login' => Carbon::now()->format('Y-m-d H:i:s'),
