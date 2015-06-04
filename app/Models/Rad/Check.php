@@ -32,6 +32,10 @@ class Check extends Model {
         return DB::table('radcheck')->where('username',$username)->exists();
     }
 
+    /**
+     * @param array $user
+     * @return mixed
+     */
     public static function make(array $user) {
         return DB::transaction(function() use($user){
             $id = DB::table('radcheck')->insertGetId([
@@ -57,6 +61,22 @@ class Check extends Model {
         });
     }
 
+    /**
+     * @param int $take
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function online($take = 20) {
+        $query = DB::table('radacct')->whereNull('acctstoptime');
+
+        $query->orderBy("radacctid","desc");
+
+        return $query->paginate($take);
+    }
+
+    /**
+     * @param int $take
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public static function page($take = 20) {
         $query = DB::table('radcheck');
 

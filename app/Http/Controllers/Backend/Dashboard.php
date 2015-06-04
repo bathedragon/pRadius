@@ -9,11 +9,14 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Rad\Check;
 
 class Dashboard extends Controller {
     
     public function index() {
-        return 1111;
+        return view('backend.report.online',[
+            'members' => Check::online()
+        ]);
     }
     
     public function create() {}

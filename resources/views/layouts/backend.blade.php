@@ -84,11 +84,15 @@
                     流量方案
                 </a>
             </li>
-            <li>
-                <a class="main-nav__link" href="tables.html">
-                    <span class="main-nav__icon"><i class="pe-7f-note"></i></span>
-                    Tables &amp; forms
+            <li class="main-nav--collapsible">
+                <a class="main-nav__link" href="#" onclick="return false;">
+                    <span class="main-nav__icon"><i class="pe-7f-monitor"></i></span>
+                    统计 <span class="badge badge--line badge--blue">2</span>
                 </a>
+                <ul class="main-nav__submenu">
+                    <li><a href="/admin/report/online"><span>在线用户</span></a></li>
+                    <li><a href="/admin/report/top"><span>使用排行</span></a></li>
+                </ul>
             </li>
             <li>
                 <a class="main-nav__link" href="stats.html">
