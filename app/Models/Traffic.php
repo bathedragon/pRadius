@@ -24,9 +24,9 @@ class Traffic extends Model {
     private $username;
     private $group;
 
-    public function __construct($username) {
+    public function __construct($username = null) {
         $this->username = $username;
-        $this->group = Group::belong($username);
+        $this->group = $username != null ? Group::belong($username) : '';
         //Carbon::setTestNow(Carbon::create(2015, 5, 31, 12));
     }
 

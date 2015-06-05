@@ -12,21 +12,33 @@ use Illuminate\Http\Request;
 use Cache;
 use App\Models\Rad\Check;
 use App\Models\Traffic;
+use Illuminate\Pagination\Paginator;
 
 class Accounting extends Controller {
     
     public function index(Request $req) {
-        $key = 'graph:users:'.$req->get('page',1);
+        $page = $req->get('page',1);
+        $key = 'graph:users:'.$page;
+
+        Paginator::currentPageResolver(function() use($page) {
+            return $page;
+        });
         $users = Cache::remember($key,10,function(){
             return Check::page();
         });
 
-        $records = Traffic::page(10,$req->get('username',null));
+
+        $r_page = $req->get('rpage',1);
+        Paginator::currentPageResolver(function() use($r_page) {
+            return $r_page;
+        });
+
+        $records = Traffic::page(10,$req->get('username'));
 
         return view('backend.accounting.index',[
             'users' => $users,
             'records' => $records,
-            'query' => $req->only(['page','username']),
+            'query' => $req->only(['upage','username']),
             'username' => $req->get('username')
         ]);
     }

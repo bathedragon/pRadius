@@ -25,8 +25,11 @@
                             @foreach($users as $user)
                                 <a type="button" class="filter btn green <?php echo $user->username == $username ? 'inverse' : '';?>" href="/admin/accounting?username={{$user->username}}">{{$user->username}}</a>
                             @endforeach
-                            {!!$users->render()!!}
+
                         </div>
+                    </div>
+                    <div class="row" style="text-align: center">
+                        {!!$users->render()!!}
                     </div>
                 </div>
             </article>

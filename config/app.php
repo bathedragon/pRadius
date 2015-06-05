@@ -80,7 +80,8 @@ return [
 
 	'key' => env('APP_KEY', 'pzzzzzzy'),
 
-	'cipher' => MCRYPT_RIJNDAEL_128,
+    //php artisan key:generate
+	'cipher' => 'AES-256-CBC',
 
 	/*
 	|--------------------------------------------------------------------------
