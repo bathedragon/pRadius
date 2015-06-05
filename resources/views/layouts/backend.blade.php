@@ -100,6 +100,12 @@
                     分析
                 </a>
             </li>
+            <li>
+                <a class="main-nav__link" href="/admin/accounting">
+                    <span class="main-nav__icon"><i class="pe-7f-graph3"></i></span>
+                    历史记录
+                </a>
+            </li>
         </ul>
 
     </aside> <!-- /sidebar -->

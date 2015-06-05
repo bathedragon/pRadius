@@ -43,6 +43,8 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'administrator'],function() {
 
     Route::resource('operator','Backend\Operator');
     Route::controller('operator','Backend\Operator');
+
+    Route::resource('accounting','Backend\Accounting');
 });
 
 

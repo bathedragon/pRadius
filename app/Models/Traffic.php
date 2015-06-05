@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\Models\Rad\Group;
+use Illuminate\Pagination\Paginator;
 
 /**
  * 流量
@@ -100,6 +101,23 @@ class Traffic extends Model {
         $result = DB::select(DB::raw($sql),[$from,$to,$take]);
 
         return $result;
+    }
+
+
+    /**
+     * @param int $take
+     * @param null $username
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function page($take = 20, $username = null) {
+
+        $query = DB::table('radacct');
+        if($username != null) {
+            $query->where('username',$username);
+        }
+
+        $query->orderBy("radacctid","desc");
+        return $query->paginate($take)->setPageName('rpage');
     }
 
 }
