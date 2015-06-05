@@ -38,7 +38,7 @@ class Accounting extends Controller {
         return view('backend.accounting.index',[
             'users' => $users,
             'records' => $records,
-            'query' => $req->only(['upage','username']),
+            'query' => $req->only(['page','username']),
             'username' => $req->get('username')
         ]);
     }
