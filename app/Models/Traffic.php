@@ -87,4 +87,19 @@ class Traffic extends Model {
     public function remove() {
         return DB::table('radacct')->where("username",$this->username)->delete() >= 0;
     }
+
+
+    public static function top($from,$to,$take = 10,$order = 'download',$order_type = 'desc') {
+        $sql = "SELECT DISTINCT(radacct.username),radacct.acctstarttime,MAX(radacct.acctstoptime) AS acctstoptime,
+                radacct.radacctid,
+                SUM(radacct.acctsessiontime) AS `time`,
+                SUM(radacct.acctinputoctets) AS upload,
+                SUM(radacct.acctoutputoctets) AS download FROM radacct WHERE
+                radacct.acctstarttime > ? AND acctstarttime < ?
+                GROUP BY radacct.username ORDER BY $order DESC LIMIT ?";
+        $result = DB::select(DB::raw($sql),[$from,$to,$take]);
+
+        return $result;
+    }
+
 }

@@ -10,14 +10,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Request as FacadeRequest;
 use App\Models\Plan as PlanModel;
+use Cache;
 
 class Home extends Controller {
 
 
     public function index() {
-        $plan = PlanModel::instance();
+        $plans = Cache::rememberForever('plans',function(){
+            $plan = PlanModel::instance();
+            return $plan->getAll();
+        });
+
         return view('frontend.home',[
-            'plans' => $plan->getAll()
+            'plans' => $plans
         ]);
     }
 }

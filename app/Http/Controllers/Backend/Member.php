@@ -79,12 +79,7 @@ class Member extends Controller {
     public function update() {}
 
     public function delete() {
-        $id = FacadeRequest::input('id');
-        $member = Check::find($id);
-        $ret = $member->delete();
-
-        $traffic = new Traffic(FacadeRequest::input('username'));
-        $traffic->remove();
+        $ret = Check::destroy(FacadeRequest::input('username'));
 
         return ['ret' => $ret];
     }

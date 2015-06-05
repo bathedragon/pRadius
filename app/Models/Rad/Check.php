@@ -85,4 +85,18 @@ class Check extends Model {
 
         return $query->paginate($take);
     }
+
+    /**
+     * @param array|int $username
+     * @return mixed
+     */
+    public static function destroy($username) {
+        return DB::transaction(function() use($username){
+
+            DB::table('radcheck')->where("username",$username)->delete();
+            DB::table('radacct')->where('username',$username)->delete();
+            DB::table('radusergroup')->where('username',$username)->delete();
+            return true;
+        });
+    }
 }
