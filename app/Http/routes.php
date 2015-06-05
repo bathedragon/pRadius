@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin' ,'middleware' => 'administrator'],function() {
     Route::resource('member','Backend\Member');
 
     Route::controller('report','Backend\Report');
+    Route::get('/graph','Backend\Graphs@index');
     Route::controller('graph','Backend\Graphs');
 
     Route::resource('operator','Backend\Operator');

@@ -95,9 +95,9 @@
                 </ul>
             </li>
             <li>
-                <a class="main-nav__link" href="stats.html">
+                <a class="main-nav__link" href="/admin/graph">
                     <span class="main-nav__icon"><i class="pe-7f-graph3"></i></span>
-                    Statistics
+                    分析
                 </a>
             </li>
         </ul>

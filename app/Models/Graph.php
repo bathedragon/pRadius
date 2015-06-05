@@ -17,6 +17,8 @@ class Graph extends Model {
 
     private $username;
 
+    private $graph_sql;
+
     public function __construct($username) {
         $this->username = $username;
     }
@@ -49,5 +51,47 @@ class Graph extends Model {
 
         return $data;
 
+    }
+
+
+    public function chart($type, $period) {
+        //$type login download upload
+        //$period daily monthly yearly
+        $func = camel_case(strtolower($type).'_'.strtolower($period));
+        $this->$func();
+        $result = DB::select(DB::raw($this->graph_sql),[$this->username]);
+        return $result;
+    }
+
+    private function loginDaily() {
+        $this->graph_sql = "SELECT username,COUNT(acctstarttime) AS login,DAY(acctstarttime) AS `daily` FROM radacct WHERE username=? AND acctstoptime > 0 GROUP BY `daily`";
+    }
+    private function loginMonthly() {
+        $this->graph_sql = "SELECT username,COUNT(acctstarttime) AS login,MONTHNAME(acctstarttime) AS `monthly` FROM radacct WHERE username=? AND acctstoptime > 0 GROUP BY `monthly`";
+    }
+    private function loginYearly() {
+        $this->graph_sql = "SELECT username,COUNT(acctstarttime) AS login,YEAR(acctstarttime) AS `yearly` FROM radacct WHERE username=? AND acctstoptime > 0 GROUP BY `yearly`";
+    }
+    private function downloadDaily() {
+        $this->graph_sql = "SELECT username,FLOOR(SUM(acctoutputoctets/1024/1024)) AS download, DAY(acctstarttime) AS `daily` FROM
+              radacct WHERE username = ? AND acctstoptime > 0 AND acctstarttime > DATE_SUB(curdate(),INTERVAL (DAY(curdate())-1) DAY)
+              AND acctstarttime< now() GROUP BY `daily`";
+    }
+    private function downloadMonthly() {
+        $this->graph_sql = "SELECT username,FLOOR(SUM(acctoutputoctets/1024/1024)) AS download,MONTHNAME(acctstarttime) AS `monthly` FROM radacct WHERE username=? GROUP BY `monthly`";
+    }
+    private function downloadYearly() {
+        $this->graph_sql = "SELECT username,FLOOR(SUM(acctoutputoctets/1024/1024)) AS download,YEAR(acctstarttime) AS `yearly` FROM radacct WHERE username = ? GROUP BY `yearly`";
+    }
+    private function uploadDaily() {
+        $this->graph_sql = "SELECT username,FLOOR(SUM(acctinputoctets/1024/1024)) AS upload,DAY(acctstarttime) AS `daily` FROM
+          radacct WHERE username = ? AND acctstoptime > 0 AND acctstarttime>DATE_SUB(curdate(),INTERVAL (DAY(curdate())-1) DAY)
+          AND acctstarttime < now() GROUP BY `daily`";
+    }
+    private function uploadMonthly() {
+        $this->graph_sql = "SELECT username,FLOOR(SUM(acctinputoctets/1024/1024)) AS upload,MONTHNAME(acctstarttime) AS `monthly` FROM radacct WHERE username = ? GROUP BY `monthly`";
+    }
+    private function uploadYearly() {
+        $this->graph_sql = "SELECT username,FLOOR(SUM(acctinputoctets/1024/1024)) AS upload,YEAR(acctstarttime) as `yearly` FROM radacct WHERE username = ? GROUP BY `yearly`";
     }
 }
