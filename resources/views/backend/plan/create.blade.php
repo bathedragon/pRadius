@@ -104,81 +104,19 @@
                     if(res.ret) location.reload();
                 },'json');
             });
-            $(".daily").slider({
-                range : "min",
-                min : 512,
-                max : 10240,
-                slide : function(event,ui) {
-                    $("#traffic-daily").val("每日 "+$(this).slider("value") + "M");
-                },
-                stop : function(event,ui) {
-                    $("#traffic-daily").val("每日 "+$(this).slider("value") + "M");
-                },
-                step : 512,
-                value : 512
-            });
-            $(".monthly").slider({
-                range : "min",
-                min : 1,
-                max : 101,
-                slide : function(event,ui) {
-                    $("#traffic-monthly").val("每月 "+$(this).slider("value") + "G");
-                },
-                stop : function(event,ui) {
-                    $("#traffic-monthly").val("每月 "+$(this).slider("value") + "G");
-                },
-                step : 1,
-                value : 1
-            });
-            $(".simultaneous").slider({
-                range : "min",
-                min : 1,
-                max : 10,
-                slide : function(event,ui) {
-                    $("#simultaneous-use").val(" "+$(this).slider("value") + "台设备同时登录");
-                },
-                stop : function(event,ui) {
-                    $("#simultaneous-use").val(" "+$(this).slider("value") + "台设备同时登录");
-                },
-                step : 1
-            });
 
-            $(".idletimeout").slider({
-                range : "min",
-                min : 1,
-                max : 24,
-                slide : function(event,ui) {
-                    $("#idle-timeout").val("空闲超时 "+$(this).slider("value") + "小时");
-                },
-                stop : function(event,ui) {
-                    $("#idle-timeout").val("空闲超时 "+$(this).slider("value") + "小时");
-                },
-                step : 1
-            });
-            $(".sessiontimeout").slider({
-                range : "min",
-                min : 1,
-                max : 24,
-                slide : function(event,ui) {
-                    $("#session-timeout").val("会话超时 "+$(this).slider("value") + "小时");
-                },
-                stop : function(event,ui) {
-                    $("#session-timeout").val("会话超时 "+$(this).slider("value") + "小时");
-                },
-                step : 1
-            });
-            $(".acctinterval").slider({
-                range : "min",
-                min : 1,
-                max : 60,
-                slide : function(event,ui) {
-                    $("#acct-interval").val("统计间隔 "+$(this).slider("value") + "分钟");
-                },
-                stop : function(event,ui) {
-                    $("#acct-interval").val("统计间隔 "+$(this).slider("value") + "分钟");
-                },
-                step : 1
-            });
+            sliderMaker('.daily','#traffic-daily',512,10240,512,512,'每日','M');
+
+            sliderMaker('.monthly','#traffic-monthly',1,100,1,1,'每月','G');
+
+            sliderMaker('.simultaneous','#simultaneous-use',1,10,1,1,'','台设备同时登录');
+
+            sliderMaker('.idletimeout','#idle-timeout',1,24,1,1,'空闲超时','小时');
+
+            sliderMaker('.sessiontimeout','#session-timeout',1,24,1,1,'会话超时','小时');
+
+            sliderMaker('.acctinterval','#acct-interval',1,60,1,1,'统计间隔','分钟');
+
         });
         $("#newPlan").on("click",function(){
             var param = {

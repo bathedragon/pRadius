@@ -17358,6 +17358,21 @@ function actualTab(){
     tabby(id);
 }
 
+function sliderMaker(selector,target,min,max,step,value,label_prefix,label_suffix) {
+    $(selector).slider({
+        range : "min",
+        min : min,
+        max : max,
+        slide : function(event,ui) {
+            $(target).val(label_prefix+" "+$(this).slider("value") +label_suffix);
+        },
+        stop : function(event,ui) {
+            $(target).val(label_prefix+" "+$(this).slider("value") + label_suffix);
+        },
+        step : step,
+        value : value
+    });
+}
 
 
 // Ready

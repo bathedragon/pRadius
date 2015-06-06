@@ -103,84 +103,19 @@
                     if(res.ret) location.reload();
                 },'json');
             });
-            $(".daily").slider({
-                range : "min",
-                min : 512,
-                max : 10240+512,
-                slide : function(event,ui) {
-                    $("#traffic-daily").val("每日 "+$(this).slider("value") + "M");
-                },
-                stop : function(event,ui) {
-                    $("#traffic-daily").val("每日 "+$(this).slider("value") + "M");
-                },
-                step : 512,
-                value : "{{$plan['daily']}}"
-            });
-            $(".monthly").slider({
-                range : "min",
-                min : 1,
-                max : 101,
-                slide : function(event,ui) {
-                    $("#traffic-monthly").val("每月 "+$(this).slider("value") + "G");
-                },
-                stop : function(event,ui) {
-                    $("#traffic-monthly").val("每月 "+$(this).slider("value") + "G");
-                },
-                step : 1,
-                value : "{{$plan['monthly'] / 1024}}"
-            });
-            $(".simultaneous").slider({
-                range : "min",
-                min : 0,
-                max : 10,
-                slide : function(event,ui) {
-                    $("#simultaneous-use").val(" "+$(this).slider("value") + "台设备同时登录");
-                },
-                stop : function(event,ui) {
-                    $("#simultaneous-use").val(" "+$(this).slider("value") + "台设备同时登录");
-                },
-                step : 1,
-                value : "{{$plan['simultaneous']}}"
-            });
-            $(".idletimeout").slider({
-                range : "min",
-                min : 1,
-                max : 24,
-                slide : function(event,ui) {
-                    $("#idle-timeout").val("空闲超时 "+$(this).slider("value") + "小时");
-                },
-                stop : function(event,ui) {
-                    $("#idle-timeout").val("空闲超时 "+$(this).slider("value") + "小时");
-                },
-                step : 1,
-                value : "{{$plan['idle_timeout']/3600}}"
-            });
-            $(".sessiontimeout").slider({
-                range : "min",
-                min : 1,
-                max : 24,
-                slide : function(event,ui) {
-                    $("#session-timeout").val("会话超时 "+$(this).slider("value") + "小时");
-                },
-                stop : function(event,ui) {
-                    $("#session-timeout").val("会话超时 "+$(this).slider("value") + "小时");
-                },
-                step : 1,
-                value : "{{$plan['session_timeout']/3600}}"
-            });
-            $(".acctinterval").slider({
-                range : "min",
-                min : 1,
-                max : 60,
-                slide : function(event,ui) {
-                    $("#acct-interval").val("统计间隔 "+$(this).slider("value") + "分钟");
-                },
-                stop : function(event,ui) {
-                    $("#acct-interval").val("统计间隔 "+$(this).slider("value") + "分钟");
-                },
-                step : 1,
-                value : "{{$plan['acct_interval']/60}}"
-            });
+
+            sliderMaker('.daily','#traffic-daily',512,10240,512,"{{$plan['daily']}}",'每日','M');
+
+            sliderMaker('.monthly','#traffic-monthly',1,100,1,"{{$plan['monthly'] / 1024}}",'每月','G');
+
+            sliderMaker('.simultaneous','#simultaneous-use',1,10,1,"{{$plan['simultaneous']}}",'','台设备同时登录');
+
+            sliderMaker('.idletimeout','#idle-timeout',1,24,1,"{{$plan['idle_timeout']/3600}}",'空闲超时','小时');
+
+            sliderMaker('.sessiontimeout','#session-timeout',1,24,1,"{{$plan['session_timeout']/3600}}",'会话超时','小时');
+
+            sliderMaker('.acctinterval','#acct-interval',1,60,1,"{{$plan['acct_interval']/60}}",'统计间隔','分钟');
+
         });
         $("#updatePlan").on("click",function(){
             var param = {

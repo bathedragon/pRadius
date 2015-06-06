@@ -89,6 +89,7 @@ class GroupCheck extends Model {
 
         $reply = DB::select(DB::raw("select GROUP_CONCAT(attribute) as attr,group_concat(value) as val from radgroupreply where groupname=? group by groupname"),[$groupname]);
 
+        if(!isset($reply[0])) abort(500);
         $reply = $reply[0];
 
         $reply_attrs = explode(",",str_replace([env('Acct_Interim_Interval'),env('Session_Timeout'),env('Idle_Timeout')],['acct_interval','session_timeout','idle_timeout'],$reply->attr));
