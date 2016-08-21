@@ -40,8 +40,8 @@ class Check extends Model {
         return DB::transaction(function() use($user){
             $id = DB::table('radcheck')->insertGetId([
                 'username' => $user['username'],
-                'attribute' => 'password',
-                'op' => '==',
+                'attribute' => 'Cleartext-Password',
+                'op' => ':=',
                 'value' => $user['password']
             ]);
 
